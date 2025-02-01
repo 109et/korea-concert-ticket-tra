@@ -4,9 +4,8 @@ async function sleep(t) {
 
 function theFrame() {
     if (window._theFrameInstance == null) {
-      window._theFrameInstance = document.getElementById('oneStopFrame').contentWindow;
+        window._theFrameInstance = document.getElementById('oneStopFrame').contentWindow;
     }
-  
     return window._theFrameInstance;
 }
 
@@ -35,6 +34,12 @@ function clickOnArea(area) {
     }
 }
 
+// 新增播放音效的函式
+function playSound() {
+    const audio = new Audio("https://www.myinstants.com/media/sounds/bell.mp3"); // 替換為你想使用的音效 URL 或本地檔案
+    audio.play();
+}
+
 async function findSeat() {
     let frame = theFrame();
     let canvas = frame.document.getElementById("ez_canvas");
@@ -47,8 +52,11 @@ async function findSeat() {
         // Check if fill color is different from #DDDDDD or none
         if (fillColor !== "#DDDDDD" && fillColor !== "none") {
             console.log("Rect with different fill color found:", seat[i]);
-            var clickEvent = new Event('click', { bubbles: true });
 
+            // 播放音效
+            playSound();
+
+            var clickEvent = new Event('click', { bubbles: true });
             seat[i].dispatchEvent(clickEvent);
             frame.document.getElementById("nextTicketSelection").click();
             return true;
@@ -94,6 +102,5 @@ async function waitFirstLoad() {
     await sleep(1000);
     searchSeat(data);
 }
-
 
 waitFirstLoad();
