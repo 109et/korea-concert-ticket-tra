@@ -36,7 +36,7 @@ function clickOnArea(area) {
 
 // 新增播放音效的函式
 function playSound() {
-    const audio = new Audio("https://www.myinstants.com/media/sounds/bell.mp3"); // 替換為你想使用的音效 URL 或本地檔案
+    const audio = new Audio("assets/alert.mp3"); 
     audio.play();
 }
 
